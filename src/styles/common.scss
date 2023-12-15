@@ -2,3 +2,19 @@ body {
   margin: 0px;
   padding: 0px;
 }
+
+.popup-body {
+  width: 500px;
+}
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popup-title {
+  letter-spacing: 2px;
+}
+.fa-times {
+  cursor: pointer;
+}

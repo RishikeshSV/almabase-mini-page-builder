@@ -13,8 +13,8 @@ const Sidebar = ({ setDraggedItem }) => {
             onDragStart={(e) =>
               setDraggedItem({
                 ...item,
-                x: e.clientX - e.currentTarget.getBoundingClientRect().left,
-                y: e.clientY - e.currentTarget.getBoundingClientRect().top,
+                x: e.clientX - e.currentTarget.getBoundingClientRect().left, //calculate the offset
+                y: e.clientY - e.currentTarget.getBoundingClientRect().top, //calculate the offset
               })
             } //item being dragged
           >

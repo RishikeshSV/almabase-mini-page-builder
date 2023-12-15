@@ -11,7 +11,7 @@ function App() {
       <div className="app-header">MINI PAGE BUILDER</div>
       <div className="container">
         <Sidebar setDraggedItem={setDraggedItem} />
-        <Canvas draggedItem={draggedItem} />
+        <Canvas draggedItem={draggedItem} setDraggedItem={setDraggedItem} />
       </div>
     </React.Fragment>
   );
