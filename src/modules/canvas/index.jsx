@@ -7,24 +7,16 @@ const Canvas = ({ draggedItem }) => {
     e.preventDefault();
 
     const canvasRect = e.currentTarget.getBoundingClientRect();
-
-    if (
-      e.clientX >= canvasRect.left &&
-      e.clientX <= canvasRect.right &&
-      e.clientY >= canvasRect.top &&
-      e.clientY <= canvasRect.bottom
-    ) {
-      // Calculate the position relative to the canvas
-      const x = e.clientX - draggedItem.x - canvasRect.left;
-      const y = e.clientY - draggedItem.y - canvasRect.top;
-      setItems([
-        ...items,
-        {
-          name: draggedItem.Name,
-          position: { x, y },
-        },
-      ]);
-    }
+    // Calculate the position relative to the canvas
+    const x = e.clientX - draggedItem.x - canvasRect.left;
+    const y = e.clientY - draggedItem.y - canvasRect.top;
+    setItems([
+      ...items,
+      {
+        name: draggedItem.Name,
+        position: { x, y },
+      },
+    ]);
   };
 
   return (
