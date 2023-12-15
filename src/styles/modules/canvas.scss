@@ -1,0 +1,23 @@
+.canvas {
+  width: calc(100% - 200px);
+}
+
+.canvas-header {
+  margin: 5px 0px;
+}
+
+.canvas-area {
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  background: #f1f1f1;
+  height: calc(100% - 30px);
+}
+
+.dragged-item {
+  display: inline-block;
+  position: absolute;
+  border: 1px solid #b5b5b5;
+  padding: 5px;
+  border-radius: 5px;
+  width: 125px;
+}
