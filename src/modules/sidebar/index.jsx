@@ -27,13 +27,14 @@ const Sidebar = ({ setDraggedItem }) => {
         </div>
       </div>
       <div className="sidebar-footer">
+        <div className="flex-one" />
         <div className="options">
           <i class="fa-solid fa-upload pd-r-8" />
-          IMPORT
+          UPLOAD
         </div>
         <div className="options">
           <i class="fa-solid fa-download pd-r-8" />
-          EXPORT
+          DOWNLOAD
         </div>
       </div>
     </div>

@@ -17,12 +17,15 @@
   .sidebar {
     width: 100%;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
   }
   .sidebar-body {
     width: 60%;
   }
   .sidebar-footer {
-    width: 30%;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
