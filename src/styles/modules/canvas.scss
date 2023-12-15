@@ -10,14 +10,16 @@
   border: 1px solid #b5b5b5;
   border-radius: 5px;
   background: #f1f1f1;
-  height: calc(100% - 30px);
+  height: calc(100% - 35px);
 }
 
 .dragged-item {
   display: inline-block;
   position: absolute;
-  border: 1px solid #b5b5b5;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 5px;
-  width: 135px;
+}
+
+.dragged-item:hover {
+  border: 1px solid #b5b5b5;
 }

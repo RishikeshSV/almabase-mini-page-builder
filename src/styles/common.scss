@@ -3,6 +3,32 @@ body {
   padding: 0px;
 }
 
+input {
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  padding-left: 5px;
+}
+
+.d-flex {
+  display: flex;
+}
+.flex-one {
+  flex: 1;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.submit-btn {
+  padding: 5px;
+  border: 1px solid #b5b5b5;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  font-size: 13px;
+  width: 100px;
+}
+
 .popup-body {
   width: 500px;
 }
