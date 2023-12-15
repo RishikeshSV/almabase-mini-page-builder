@@ -6,3 +6,15 @@
 @import "modules/app.scss";
 @import "modules/sidebar.scss";
 @import "modules/canvas.scss";
+
+@media screen and (max-width: 770px) {
+  .app-container {
+    flex-direction: column-reverse;
+  }
+  .canvas {
+    width: 100%;
+  }
+  .sidebar {
+    width: 100%;
+  }
+}

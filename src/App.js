@@ -8,10 +8,10 @@ function App() {
 
   return (
     <React.Fragment>
-      <div className="app-header">MINI PAGE BUILDER</div>
-      <div className="container">
-        <Sidebar setDraggedItem={setDraggedItem} />
+      {/* <div className="app-header">MINI PAGE BUILDER</div> */}
+      <div className="app-container pd-0 mg-0">
         <Canvas draggedItem={draggedItem} setDraggedItem={setDraggedItem} />
+        <Sidebar setDraggedItem={setDraggedItem} />
       </div>
     </React.Fragment>
   );

@@ -1,6 +1,11 @@
 body {
   margin: 0px;
   padding: 0px;
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
 }
 
 input {
@@ -27,6 +32,7 @@ input {
   letter-spacing: 2px;
   font-size: 13px;
   width: 100px;
+  font-weight: 500;
 }
 
 .popup-body {
@@ -41,6 +47,7 @@ input {
 .popup-title {
   letter-spacing: 2px;
 }
-.fa-times {
-  cursor: pointer;
+
+.fa-grip {
+  color: #b5b5b5;
 }

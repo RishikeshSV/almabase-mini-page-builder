@@ -51,7 +51,7 @@ const Canvas = ({ draggedItem, setDraggedItem }) => {
   return (
     <React.Fragment>
       <div className="canvas">
-        <div className="canvas-header">CANVAS</div>
+        {/* <div className="canvas-header">CANVAS</div> */}
         <div
           className="canvas-area"
           onDragOver={(e) => e.preventDefault()}
