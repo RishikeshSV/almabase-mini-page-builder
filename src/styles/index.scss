@@ -16,5 +16,13 @@
   }
   .sidebar {
     width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  .sidebar-body {
+    width: 60%;
+  }
+  .sidebar-footer {
+    width: 30%;
   }
 }

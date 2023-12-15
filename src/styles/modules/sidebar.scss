@@ -2,6 +2,9 @@
   width: 20%;
   background: #3d3d3d;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .sidebar-header {
   margin: 5px 0px;
@@ -25,4 +28,19 @@
 
 .sidebar-item:active {
   cursor: grabbing;
+}
+
+.options {
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  font-size: 12px;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.options:hover {
+  background: white;
+  color: black;
 }
