@@ -84,7 +84,7 @@ const ConfigureElement = ({
                 name="size"
                 className="wd-100"
                 type="number"
-                defaultValue={16}
+                defaultValue={item.size ?? 16}
               />
             </div>
             <div className="d-flex">
@@ -93,7 +93,7 @@ const ConfigureElement = ({
                 name="weight"
                 className="wd-100"
                 type="number"
-                defaultValue={400}
+                defaultValue={item.weight ?? 400}
               />
             </div>
           </div>
