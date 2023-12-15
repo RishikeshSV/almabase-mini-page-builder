@@ -17,7 +17,7 @@ const ConfigureElement = ({
     e.preventDefault();
     const form = new FormData(e.target);
     const formData = {};
-    for (const [name, value] of form) formData[name] = value;
+    for (const [name, value] of form) formData[name] = value; //extract data from form and store it in a object for easy accessibility
     const temp = {
       ...item,
       name: formData.name,
@@ -25,7 +25,7 @@ const ConfigureElement = ({
       weight: formData.weight,
       size: formData.size,
     };
-    const index = items.findIndex((item) => item.Id === temp.Id);
+    const index = items.findIndex((item) => item.Id === temp.Id); //check if new or exisiting item
     setItem(temp);
     index === -1
       ? setItems((prevItems) => [...prevItems, temp])
@@ -33,8 +33,8 @@ const ConfigureElement = ({
           ...prevItems.slice(0, index),
           temp,
           ...prevItems.slice(index + 1),
-        ]);
-    toggle();
+        ]); //update item with new configurations(x,y,size etc) or add the new item to canvas with the selected configurations
+    toggle(); //closing the modal
   };
 
   return (

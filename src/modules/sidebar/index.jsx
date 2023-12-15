@@ -8,6 +8,7 @@ const Sidebar = ({ setDraggedItem, uploadFile, downloadFile }) => {
         <div className="sidebar-items">
           {Items.map((item) => (
             <div
+              //item being dragged
               key={`Item-${item.Id}`}
               className="sidebar-item d-flex"
               draggable //enable div as a draggable
@@ -18,7 +19,7 @@ const Sidebar = ({ setDraggedItem, uploadFile, downloadFile }) => {
                     x: e.clientX - e.currentTarget.getBoundingClientRect().left,
                     y: e.clientY - e.currentTarget.getBoundingClientRect().top,
                   }) //calculate the offset
-              } //item being dragged
+              }
             >
               <i className="fa-solid fa-grip fa-rotate-90" />
               <div className="pd-l-10">{item.Name} </div>

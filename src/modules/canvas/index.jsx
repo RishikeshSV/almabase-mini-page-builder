@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import ConfigureElement from "./ConfigureElement";
 
 const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
-  const [activeItem, setActiveItem] = useState({});
+  const [activeItem, setActiveItem] = useState({}); //the item that was just dragged, i.e, to keep track of the dragged item
 
   const [openConfigurePopup, setOpenConfigurePopup] = useState(false);
 
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState({}); //the selected item from the canvas
 
   const handleDrop = (e) => {
+    //save coordinates and the dragged item in the canvas
     e.preventDefault();
     const canvasRect = e.currentTarget.getBoundingClientRect();
     // Calculate the position relative to the canvas
@@ -25,6 +26,7 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
       ]);
       setSelectedItem(updatedItem);
     } else {
+      //new item, add it to canvas after user sets up the configuration
       setActiveItem({
         Id: items.length,
         name: draggedItem.Name,
@@ -36,10 +38,13 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
 
   const handleKeyDown = (key) => {
     if (Object.keys(selectedItem).length) {
+      //condition to check if use has selected an item
       if (key === "Enter") {
+        //open the config menu for the element if user clicked enter
         setActiveItem(selectedItem);
         setOpenConfigurePopup(true);
       } else if (key === "Delete") {
+        //delete item from canvas if user clicked delete
         setActiveItem({});
         setSelectedItem({});
         setItems(items.filter((item) => item.Id !== selectedItem.Id));
@@ -75,9 +80,9 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
                       ...item,
                       x:
                         e.clientX -
-                        e.currentTarget.getBoundingClientRect().left, //calculate the offset
+                        e.currentTarget.getBoundingClientRect().left,
                       y:
-                        e.clientY - e.currentTarget.getBoundingClientRect().top, //calculate the offset
+                        e.clientY - e.currentTarget.getBoundingClientRect().top, //calculating the offset
                     })
                   } //item being dragged
                   onDoubleClick={() => {

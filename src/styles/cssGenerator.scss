@@ -63,31 +63,8 @@ $i: 0;
   .wd-#{$i} {
     width: #{$i}px;
   }
-  .min-wd-#{$i} {
-    min-width: #{$i}px;
-  }
   .ht-#{$i} {
     height: #{$i}px;
-  }
-  $i: $i + 1;
-}
-/*========== PCT Height & Width ==================*/
-$i: 0;
-@while $i<=100 {
-  .wd-pct-#{$i} {
-    width: round(percentage($i/100)) !important;
-  }
-  .ht-pct-#{$i} {
-    height: round(percentage($i/100));
-  }
-  $i: $i + 1;
-}
-
-/*======== font size in px ==================*/
-$i: 8;
-@while $i<20 {
-  .fs-#{$i} {
-    font-size: #{$i}px !important;
   }
   $i: $i + 1;
 }
