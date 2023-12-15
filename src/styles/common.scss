@@ -51,3 +51,7 @@ input {
 .fa-grip {
   color: #b5b5b5;
 }
+
+input[type="file"] {
+  display: none;
+}

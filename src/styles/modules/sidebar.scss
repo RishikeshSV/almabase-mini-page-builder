@@ -31,6 +31,7 @@
 }
 
 .options {
+  display: block;
   border: 1px solid white;
   padding: 10px;
   border-radius: 5px;
@@ -38,6 +39,7 @@
   font-size: 12px;
   transition: background 0.3s ease-in-out;
   cursor: pointer;
+  letter-spacing: 2px;
 }
 
 .options:hover {

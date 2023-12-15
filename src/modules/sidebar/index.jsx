@@ -1,6 +1,6 @@
 import { Items } from "./SidebarData";
 
-const Sidebar = ({ setDraggedItem }) => {
+const Sidebar = ({ setDraggedItem, uploadFile, downloadFile }) => {
   return (
     <div className="sidebar pd-x-20">
       <div className="sidebar-body">
@@ -28,12 +28,17 @@ const Sidebar = ({ setDraggedItem }) => {
       </div>
       <div className="sidebar-footer">
         <div className="flex-one" />
-        <div className="options">
-          <i class="fa-solid fa-upload pd-r-8" />
+        <label className="options" htmlFor="file-upload">
+          <i className="fa-solid fa-upload pd-r-8" />
           UPLOAD
-        </div>
-        <div className="options">
-          <i class="fa-solid fa-download pd-r-8" />
+          <input
+            id="file-upload"
+            type="file"
+            onChange={(e) => uploadFile(e.target.files[0])}
+          />
+        </label>
+        <div className="options" onClick={() => downloadFile()}>
+          <i className="fa-solid fa-download pd-r-8" />
           DOWNLOAD
         </div>
       </div>

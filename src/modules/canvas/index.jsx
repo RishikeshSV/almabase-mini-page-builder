@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ConfigureElement from "./ConfigureElement";
 
-const Canvas = ({ draggedItem, setDraggedItem }) => {
-  const [items, setItems] = useState([]);
+const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
   const [activeItem, setActiveItem] = useState({});
 
   const [openConfigurePopup, setOpenConfigurePopup] = useState(false);
