@@ -6,9 +6,12 @@ const ConfigureElement = ({
   setOpenPopup,
   item,
   setItem,
+  items,
   setItems,
 }) => {
-  const toggle = () => setOpenPopup(!openPopup);
+  const toggle = () => {
+    setOpenPopup(!openPopup);
+  };
 
   const saveConfiguration = (e) => {
     e.preventDefault();
@@ -22,8 +25,15 @@ const ConfigureElement = ({
       weight: formData.weight,
       size: formData.size,
     };
+    const index = items.findIndex((item) => item.Id === temp.Id);
     setItem(temp);
-    setItems((prevItems) => [...prevItems, temp]);
+    index === -1
+      ? setItems((prevItems) => [...prevItems, temp])
+      : setItems((prevItems) => [
+          ...prevItems.slice(0, index),
+          temp,
+          ...prevItems.slice(index + 1),
+        ]);
     toggle();
   };
 

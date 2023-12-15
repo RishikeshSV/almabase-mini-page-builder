@@ -16,12 +16,15 @@ const Canvas = ({ draggedItem, setDraggedItem }) => {
     const x = e.clientX - draggedItem.x - canvasRect.left;
     const y = e.clientY - draggedItem.y - canvasRect.top;
     if (draggedItem.position) {
+      // not a new item, just moving the existing item inside the canvas
       const index = items.findIndex((item) => item.Id === draggedItem.Id);
+      const updatedItem = { ...items[index], position: { x, y } };
       setItems([
         ...items.slice(0, index),
-        { ...items[index], position: { x, y } },
+        updatedItem,
         ...items.slice(index + 1),
       ]);
+      setSelectedItem(updatedItem);
     } else {
       setActiveItem({
         Id: items.length,
@@ -33,7 +36,7 @@ const Canvas = ({ draggedItem, setDraggedItem }) => {
   };
 
   const handleKeyDown = (key) => {
-    if (selectedItem) {
+    if (Object.keys(selectedItem).length) {
       if (key === "Enter") {
         setActiveItem(selectedItem);
         setOpenConfigurePopup(true);
@@ -101,6 +104,7 @@ const Canvas = ({ draggedItem, setDraggedItem }) => {
         setOpenPopup={setOpenConfigurePopup}
         item={activeItem}
         setItem={setActiveItem}
+        items={items}
         setItems={setItems}
       />
     </React.Fragment>
