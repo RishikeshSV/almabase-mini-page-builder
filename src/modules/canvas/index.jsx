@@ -5,16 +5,26 @@ const Canvas = ({ draggedItem }) => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const { left, top } = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
-    setItems([
-      ...items,
-      {
-        ...draggedItem,
-        position: { x, y },
-      },
-    ]);
+
+    const canvasRect = e.currentTarget.getBoundingClientRect();
+
+    if (
+      e.clientX >= canvasRect.left &&
+      e.clientX <= canvasRect.right &&
+      e.clientY >= canvasRect.top &&
+      e.clientY <= canvasRect.bottom
+    ) {
+      // Calculate the position relative to the canvas
+      const x = e.clientX - draggedItem.x - canvasRect.left;
+      const y = e.clientY - draggedItem.y - canvasRect.top;
+      setItems([
+        ...items,
+        {
+          name: draggedItem.Name,
+          position: { x, y },
+        },
+      ]);
+    }
   };
 
   return (
@@ -34,7 +44,7 @@ const Canvas = ({ draggedItem }) => {
                   transform: `translate(${item.position.x}px, ${item.position.y}px`,
                 }}
               >
-                {item.Name}
+                {item.name}
               </div>
             ))
           : null}

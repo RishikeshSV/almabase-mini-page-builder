@@ -10,7 +10,13 @@ const Sidebar = ({ setDraggedItem }) => {
             key={`Item-${item.Id}`}
             className="sidebar-item"
             draggable //enable div as a draggable
-            onDragStart={(e) => setDraggedItem(item)} //item being dragged
+            onDragStart={(e) =>
+              setDraggedItem({
+                ...item,
+                x: e.clientX - e.currentTarget.getBoundingClientRect().left,
+                y: e.clientY - e.currentTarget.getBoundingClientRect().top,
+              })
+            } //item being dragged
           >
             {item.Name}
           </div>
