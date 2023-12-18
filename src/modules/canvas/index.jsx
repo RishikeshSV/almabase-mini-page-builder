@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ConfigureElement from "./ConfigureElement";
 
 const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
-  const [activeItem, setActiveItem] = useState({}); //the item that was just dragged, i.e, to keep track of the dragged item
+  const [activeItem, setActiveItem] = useState({}); //the item that was just dragged that is not saved on the canvas yet
 
   const [openConfigurePopup, setOpenConfigurePopup] = useState(false);
 
-  const [selectedItem, setSelectedItem] = useState({}); //the selected item from the canvas
+  const [selectedItem, setSelectedItem] = useState({}); //the selected item from the canvas that is already saved (to edit or delete)
 
   const handleDrop = (e) => {
     //save coordinates and the dragged item in the canvas
@@ -54,7 +54,7 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
 
   return (
     <React.Fragment>
-      <div className="canvas">
+      <div className="canvas" onClick={() => setSelectedItem({})}>
         {/* <div className="canvas-header">CANVAS</div> */}
         <div
           className="canvas-area"
@@ -89,7 +89,8 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
                     setActiveItem(item);
                     setOpenConfigurePopup(true);
                   }}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     selectedItem.Id === item.Id
                       ? setSelectedItem({})
                       : setSelectedItem(item);
