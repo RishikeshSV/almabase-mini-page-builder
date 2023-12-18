@@ -98,7 +98,6 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
 
   const handleMouseUp = (e) => {
     //final event when user lifts off the click
-
     const newSelectedItems = items.filter(
       (item) => isItemInSelectionArea(item, selectionArea) // |filter out selected items in the selection area
     );
@@ -118,13 +117,18 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
       top: item.position.y,
       right: item.position.x,
       bottom: item.position.y,
-    };
-
+    }; //getting the items position on the canvas
+    const selectionRect = {
+      left: Math.min(area.start.x, area.end.x),
+      top: Math.min(area.start.y, area.end.y),
+      right: Math.max(area.start.x, area.end.x),
+      bottom: Math.max(area.start.y, area.end.y),
+    }; // getting the selection area positions
     return (
-      itemRect.left >= area.start.x &&
-      itemRect.top >= area.start.y &&
-      itemRect.right <= area.end.x &&
-      itemRect.bottom <= area.end.y
+      itemRect.left < selectionRect.right &&
+      itemRect.right > selectionRect.left &&
+      itemRect.top < selectionRect.bottom &&
+      itemRect.bottom > selectionRect.top
     ); //check if item corridnates are inside the selection rectangle area
   };
 
@@ -182,10 +186,12 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
         <div
           className="selection-area"
           style={{
-            left: `${selectionArea.start.x}px`,
-            top: `${selectionArea.start.y}px`,
-            width: `${selectionArea.end.x - selectionArea.start.x}px`,
-            height: `${selectionArea.end.y - selectionArea.start.y}px`,
+            left: `${Math.min(selectionArea.start.x, selectionArea.end.x)}px`, // it could be x or -x since user can drag from left->right or right->left
+            top: `${Math.min(selectionArea.start.y, selectionArea.end.y)}px`, // it could be y or -y since user can drag from top->bottom or bottom->top
+            width: `${Math.abs(selectionArea.start.x - selectionArea.end.x)}px`, //width and height has to be positive always
+            height: `${Math.abs(
+              selectionArea.start.y - selectionArea.end.y
+            )}px`,
           }}
         /> //display selection area if the user is still dragging
       )}
