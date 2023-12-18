@@ -48,3 +48,10 @@
 .content {
   width: 100px;
 }
+
+.selection-area {
+  position: absolute;
+  background: rgba(143, 143, 255, 0.241);
+  pointer-events: none; // To allow interaction with items beneath
+  z-index: 9999;
+}
