@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ConfigureElement from "./ConfigureElement";
 
 const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
@@ -14,6 +14,13 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
     end: { x: 0, y: 0 },
   });
   const [isDragging, setIsDragging] = useState(false);
+
+  const stateRef = useRef({ selectedItems }); // needed for handleKeyDown which is created at initial render when selectedItems is empty, so it will always use empty array instead of the updated one
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown); //adding the window event listener on initial mount
+    return () => window.removeEventListener("keydown", handleKeyDown); //removing the window event listener on unmount
+  }, []);
 
   const handleDrop = (e) => {
     //save coordinates and the dragged item in the canvas
@@ -31,6 +38,7 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
         updatedItem,
         ...items.slice(index + 1),
       ]);
+      stateRef.current.selectedItems = [updatedItem]; //keeping reference to the updated value to use in handleKeyDown event created at initial render
       setSelectedItems([updatedItem]);
     } else {
       //new item, add it to canvas after user sets up the configuration
@@ -47,18 +55,20 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
 
   const handleKeyDown = (key) => {
     //condition to check if user has selected an item
-    if (selectedItems.length === 1 && key === "Enter") {
+    const currentSelectedItems = stateRef.current.selectedItems; //using current reference to get the updated value
+    if (currentSelectedItems.length === 1 && key.code === "Enter") {
       //open the config menu for the element if user clicked enter
       //can't open the menu for multiple elements
-      setActiveItem(selectedItems[0]);
+      setActiveItem(currentSelectedItems[0]);
       setOpenConfigurePopup(true);
-    } else if (selectedItems.length > 1 && key === "Delete") {
+    } else if (currentSelectedItems.length >= 1 && key.code === "Delete") {
       //delete item from canvas if user clicked delete
       //can delete multiple items at one time
       setActiveItem({});
-      setSelectedItems([]);
-      const itemIdsToDelete = selectedItems.map((a) => a.Id);
-      setItems(items.filter((item) => !itemIdsToDelete.includes(item.Id)));
+      const itemIdsToDelete = currentSelectedItems.map((a) => a.Id);
+      setItems((prevItems) =>
+        prevItems.filter((item) => !itemIdsToDelete.includes(item.Id))
+      );
     }
   };
 
@@ -92,9 +102,13 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
     const newSelectedItems = items.filter(
       (item) => isItemInSelectionArea(item, selectionArea) // |filter out selected items in the selection area
     );
-    newSelectedItems.length
-      ? setSelectedItems(newSelectedItems)
-      : setSelectedItems([]);
+    if (newSelectedItems.length) {
+      setSelectedItems(newSelectedItems);
+      stateRef.current.selectedItems = newSelectedItems;
+    } else {
+      setSelectedItems([]);
+      stateRef.current.selectedItems = [];
+    }
     setIsDragging(false); //drag and select is complete
   };
 
@@ -150,13 +164,14 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
                   y: e.clientY - e.currentTarget.getBoundingClientRect().top, //calculating the offset
                 })
               } //item being dragged
-              onDoubleClick={(e) => {
-                e.stopPropagation();
+              onDoubleClick={() => {
                 setActiveItem(item);
                 setOpenConfigurePopup(true); //open the config menu on double click
               }}
-              onClick={(e) => setSelectedItems([item])}
-              onKeyDown={(e) => handleKeyDown(e.key)}
+              onClick={() => {
+                setSelectedItems([item]);
+                stateRef.current.selectedItems = [item];
+              }}
             >
               {item.type === "Input" ? <input type="text" /> : item.name}
             </div>
