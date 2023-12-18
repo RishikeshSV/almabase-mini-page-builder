@@ -41,7 +41,9 @@ const ConfigureElement = ({
 
   return (
     <Modal isOpen={openPopup} toggle={toggle} centered>
-      <ModalHeader toggle={toggle}>{`Edit ${item.name}`}</ModalHeader>
+      <ModalHeader
+        toggle={toggle}
+      >{`EDIT ${item.type?.toUpperCase()}`}</ModalHeader>
       <ModalBody>
         <form onSubmit={(e) => saveConfiguration(e)}>
           {item.type !== "Input" ? (

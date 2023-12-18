@@ -38,10 +38,11 @@ input {
   font-size: 13px;
   width: 100px;
   font-weight: 400;
-  transition: opacity 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .submit-btn:hover {
-  opacity: 0.8;
+  background: #5b5bd7;
+  color: white;
 }
 
 .popup-body {
