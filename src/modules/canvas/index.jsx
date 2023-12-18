@@ -42,6 +42,7 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
       });
       setOpenConfigurePopup(true);
     }
+    setIsDragging(false);
   };
 
   const handleKeyDown = (key) => {
@@ -115,53 +116,51 @@ const Canvas = ({ draggedItem = {}, setDraggedItem, items = [], setItems }) => {
 
   return (
     <React.Fragment>
-      <div className="canvas">
-        <div
-          className="canvas-area"
-          onDragOver={(e) => e.preventDefault()}
-          onDrop={(e) => handleDrop(e)}
-          onMouseDown={(e) => handleMouseDown(e)} //click
-          onMouseMove={(e) => handleMouseMove(e)} //drag and move
-          onMouseUp={(e) => handleMouseUp(e)} //finish selection
-          ref={canvasRef}
-        >
-          {items &&
-            items.map((item, i) => (
-              <div
-                tabIndex={i}
-                key={`Item-${i}`}
-                draggable
-                className="dragged-item"
-                style={{
-                  outline: "none",
-                  transform: `translate(${item.position.x}px, ${item.position.y}px`,
-                  fontWeight: item.weight,
-                  fontSize: item.size + "px",
-                  color: item.color,
-                  background: item.background,
-                  border: selectedItems.some((a) => a.Id === item.Id)
-                    ? "1px solid red"
-                    : "",
-                }}
-                onDragStart={(e) =>
-                  setDraggedItem({
-                    ...item,
-                    x: e.clientX - e.currentTarget.getBoundingClientRect().left,
-                    y: e.clientY - e.currentTarget.getBoundingClientRect().top, //calculating the offset
-                  })
-                } //item being dragged
-                onDoubleClick={(e) => {
-                  e.stopPropagation();
-                  setActiveItem(item);
-                  setOpenConfigurePopup(true); //open the config menu on double click
-                }}
-                onClick={(e) => setSelectedItems([item])}
-                onKeyDown={(e) => handleKeyDown(e.key)}
-              >
-                {item.type === "Input" ? <input type="text" /> : item.name}
-              </div>
-            ))}
-        </div>
+      <div
+        className="canvas"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={(e) => handleDrop(e)}
+        onMouseDown={(e) => handleMouseDown(e)} //click
+        onMouseMove={(e) => handleMouseMove(e)} //drag and move
+        onMouseUp={(e) => handleMouseUp(e)} //finish selection
+        ref={canvasRef}
+      >
+        {items &&
+          items.map((item, i) => (
+            <div
+              tabIndex={i}
+              key={`Item-${i}`}
+              draggable
+              className="dragged-item"
+              style={{
+                outline: "none",
+                transform: `translate(${item.position.x}px, ${item.position.y}px`,
+                fontWeight: item.weight,
+                fontSize: item.size + "px",
+                color: item.color,
+                background: item.background,
+                border: selectedItems.some((a) => a.Id === item.Id)
+                  ? "1px solid red"
+                  : "",
+              }}
+              onDragStart={(e) =>
+                setDraggedItem({
+                  ...item,
+                  x: e.clientX - e.currentTarget.getBoundingClientRect().left,
+                  y: e.clientY - e.currentTarget.getBoundingClientRect().top, //calculating the offset
+                })
+              } //item being dragged
+              onDoubleClick={(e) => {
+                e.stopPropagation();
+                setActiveItem(item);
+                setOpenConfigurePopup(true); //open the config menu on double click
+              }}
+              onClick={(e) => setSelectedItems([item])}
+              onKeyDown={(e) => handleKeyDown(e.key)}
+            >
+              {item.type === "Input" ? <input type="text" /> : item.name}
+            </div>
+          ))}
       </div>
 
       {isDragging && (
