@@ -44,82 +44,82 @@ const ConfigureElement = ({
       <ModalHeader toggle={toggle}>{`Edit ${item.name}`}</ModalHeader>
       <ModalBody>
         <form onSubmit={(e) => saveConfiguration(e)}>
-          {item.type !== "input" ? (
-            <div className="d-flex pd-y-5">
-              <span className="wd-60">Text:</span>
+          {item.type !== "Input" ? (
+            <div className="v-align">
+              <div className="label">Text:</div>
               <input
-                name="name"
                 className="flex-one"
+                name="name"
                 type="text"
                 defaultValue={item.name}
                 required
               />
             </div>
           ) : null}
-          <div
-            className="v-align pd-y-5"
-            style={{ justifyContent: "space-between" }}
-          >
-            <div className="v-align">
-              <div className="wd-20">X:</div>
-              <input
-                className="wd-60"
-                name="x"
-                type="number"
-                defaultValue={Math.floor(item.position?.x)}
-              />
+          <div className="parent-group">
+            <div className="child-group">
+              <div className="v-align pd-y-5">
+                <div className="label">X:</div>
+                <input
+                  className="content"
+                  name="x"
+                  type="number"
+                  defaultValue={Math.floor(item.position?.x)}
+                />
+              </div>
+              <div className="v-align pd-y-5">
+                <div className="label">Color:</div>
+                <input
+                  className="content"
+                  name="color"
+                  type="color"
+                  defaultValue={item.color ?? "#fff"}
+                />
+              </div>
             </div>
-            <div className="v-align">
-              <div className="wd-20 mg-l-10">Y:</div>
-              <input
-                name="y"
-                className="wd-60"
-                type="number"
-                defaultValue={Math.floor(item.position?.y)}
-              />
-            </div>
-            <div className="v-align">
-              <div className="wd-50 mg-l-10">Color:</div>
-              <input
-                name="color"
-                className="wd-40"
-                type="color"
-                defaultValue={item.color ?? "#fff"}
-              />
-            </div>
-            <div className="v-align">
-              <div className="wd-100 mg-l-10">Background:</div>
-              <input
-                name="background"
-                className="wd-40"
-                type="color"
-                defaultValue={item.background ?? "#f1f1f1"}
-              />
+            <div className="child-group">
+              <div className="v-align pd-y-5">
+                <div className="label">Y:</div>
+                <input
+                  className="content"
+                  name="y"
+                  type="number"
+                  defaultValue={Math.floor(item.position?.y)}
+                />
+              </div>
+
+              <div className="v-align pd-y-5">
+                <div className="label">Background:</div>
+                <input
+                  className="content"
+                  name="background"
+                  type="color"
+                  defaultValue={item.background ?? "#f1f1f1"}
+                />
+              </div>
             </div>
           </div>
-          <div
-            className="v-align pd-y-5"
-            style={{ justifyContent: "space-between" }}
-          >
-            <div className="v-align">
-              <div className="wd-100">Font Size:</div>
+          <div className="parent-group">
+            <div className="v-align pd-y-5">
+              <div className="label">Font Size:</div>
               <input
+                className="content"
                 name="size"
-                className="wd-100"
                 type="number"
                 defaultValue={item.size ?? 16}
               />
             </div>
-            <div className="v-align">
-              <div className="wd-100 mg-l-10">Font Weight:</div>
+            <div className="v-align pd-y-5">
+              <div className="label">Font Weight:</div>
               <input
+                className="content"
                 name="weight"
-                className="wd-100"
                 type="number"
                 defaultValue={item.weight ?? 400}
               />
             </div>
           </div>
+
           <div className="txt-center mg-t-10">
             <button className="submit-btn" type="submit">
               SAVE

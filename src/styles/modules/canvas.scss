@@ -31,3 +31,20 @@
 .dragged-item:hover {
   border: 1px solid #b5b5b5;
 }
+
+//CONFIGURE
+.child-group {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0px;
+}
+.parent-group {
+  display: flex;
+  justify-content: space-between;
+}
+.label {
+  width: 100px;
+}
+.content {
+  width: 100px;
+}
