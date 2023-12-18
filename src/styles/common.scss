@@ -17,6 +17,11 @@ input {
 .d-flex {
   display: flex;
 }
+.v-align {
+  display: flex;
+  align-items: center;
+}
+
 .flex-one {
   flex: 1;
 }
@@ -32,7 +37,11 @@ input {
   letter-spacing: 2px;
   font-size: 13px;
   width: 100px;
-  font-weight: 500;
+  font-weight: 400;
+  transition: opacity 0.3s ease-in-out;
+}
+.submit-btn:hover {
+  opacity: 0.8;
 }
 
 .popup-body {
@@ -54,4 +63,9 @@ input {
 
 input[type="file"] {
   display: none;
+}
+
+input[type="color"] {
+  padding: 3px;
+  cursor: pointer;
 }

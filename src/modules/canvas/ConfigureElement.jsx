@@ -24,6 +24,8 @@ const ConfigureElement = ({
       position: { x: formData.x, y: formData.y },
       weight: formData.weight,
       size: formData.size,
+      color: formData.color,
+      background: formData.background,
     };
     const index = items.findIndex((item) => item.Id === temp.Id); //check if new or exisiting item
     setItem(temp);
@@ -42,43 +44,64 @@ const ConfigureElement = ({
       <ModalHeader toggle={toggle}>{`Edit ${item.name}`}</ModalHeader>
       <ModalBody>
         <form onSubmit={(e) => saveConfiguration(e)}>
-          <div className="d-flex pd-y-5">
-            <span className="wd-100">Text:</span>
-            <input
-              name="name"
-              className="flex-one"
-              type="text"
-              defaultValue={item.name}
-            />
-          </div>
+          {item.type !== "input" ? (
+            <div className="d-flex pd-y-5">
+              <span className="wd-60">Text:</span>
+              <input
+                name="name"
+                className="flex-one"
+                type="text"
+                defaultValue={item.name}
+                required
+              />
+            </div>
+          ) : null}
           <div
-            className="d-flex pd-y-5"
+            className="v-align pd-y-5"
             style={{ justifyContent: "space-between" }}
           >
-            <div className="d-flex">
-              <div className="wd-100">X:</div>
+            <div className="v-align">
+              <div className="wd-20">X:</div>
               <input
-                className="wd-100"
+                className="wd-60"
                 name="x"
                 type="number"
                 defaultValue={Math.floor(item.position?.x)}
               />
             </div>
-            <div className="d-flex">
-              <div className="wd-100 mg-l-10">Y:</div>
+            <div className="v-align">
+              <div className="wd-20 mg-l-10">Y:</div>
               <input
                 name="y"
-                className="wd-100"
+                className="wd-60"
                 type="number"
                 defaultValue={Math.floor(item.position?.y)}
               />
             </div>
+            <div className="v-align">
+              <div className="wd-50 mg-l-10">Color:</div>
+              <input
+                name="color"
+                className="wd-40"
+                type="color"
+                defaultValue={item.color ?? "#fff"}
+              />
+            </div>
+            <div className="v-align">
+              <div className="wd-100 mg-l-10">Background:</div>
+              <input
+                name="background"
+                className="wd-40"
+                type="color"
+                defaultValue={item.background ?? "#f1f1f1"}
+              />
+            </div>
           </div>
           <div
-            className="d-flex pd-y-5"
+            className="v-align pd-y-5"
             style={{ justifyContent: "space-between" }}
           >
-            <div className="d-flex">
+            <div className="v-align">
               <div className="wd-100">Font Size:</div>
               <input
                 name="size"
@@ -87,7 +110,7 @@ const ConfigureElement = ({
                 defaultValue={item.size ?? 16}
               />
             </div>
-            <div className="d-flex">
+            <div className="v-align">
               <div className="wd-100 mg-l-10">Font Weight:</div>
               <input
                 name="weight"
