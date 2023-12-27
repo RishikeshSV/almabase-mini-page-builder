@@ -1,6 +1,6 @@
 # Mini Page Builder
 
-A small trial app for building websites.
+A small app for building websites.
 https://mini-page-builder.surge.sh/
 
 ## Installation
